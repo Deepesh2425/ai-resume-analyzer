@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Resume Analyzer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <div class="logo">
+            <div class="logo-icon">AI</div>
+            <span>Resume<span class="logo-highlight">IQ</span></span>
+        </div>
+
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#checker">Resume Checker</a>
+            <a href="#about">About</a>
+        </div>
+
+        <a href="#checker" class="nav-button">
+        Check Resume
+    </a>
+
+    </nav>
+
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                ✨ AI-Powered Resume Analysis
+            </div>
+
+            <h1>
+                Make Your Resume
+                <span>Job-Ready.</span>
+            </h1>
+
+            <p>
+                Analyze your resume, compare it with a job description, discover missing skills and improve your chances of getting noticed.
+            </p>
+
+            <a href="#checker" class="hero-button">
+            Analyze My Resume
+            <span>→</span>
+        </a>
+
+            <div class="hero-points">
+                <span>✓ PDF Resume</span>
+                <span>✓ Skill Matching</span>
+                <span>✓ Instant Analysis</span>
+            </div>
+
+        </div>
+
+
+        <div class="hero-visual">
+
+            <div class="floating-card card-one">
+                <span class="mini-icon">✓</span>
+                <div>
+                    <strong>Resume Score</strong>
+                    <small>Great Match</small>
+                </div>
+            </div>
+
+            <div class="resume-preview">
+
+                <div class="resume-top">
+                    <div class="avatar">DP</div>
+
+                    <div>
+                        <div class="fake-line large"></div>
+                        <div class="fake-line medium"></div>
+                    </div>
+                </div>
+
+                <div class="fake-section"></div>
+                <div class="fake-line"></div>
+                <div class="fake-line short"></div>
+
+                <div class="fake-section"></div>
+                <div class="fake-line"></div>
+                <div class="fake-line medium"></div>
+
+                <div class="fake-section"></div>
+
+                <div class="skill-row">
+                    <span>HTML</span>
+                    <span>CSS</span>
+                    <span>React</span>
+                </div>
+
+            </div>
+
+            <div class="floating-card card-two">
+                <span class="mini-icon purple">✦</span>
+                <div>
+                    <strong>Missing Skills</strong>
+                    <small>Find what to improve</small>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+    <section class="features">
+
+        <div class="feature">
+            <div class="feature-icon">📄</div>
+            <div>
+                <h3>Resume Analysis</h3>
+                <p>Extract and analyze your resume content.</p>
+            </div>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">🎯</div>
+            <div>
+                <h3>Job Matching</h3>
+                <p>Compare your resume with a target job.</p>
+            </div>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">💡</div>
+            <div>
+                <h3>Smart Suggestions</h3>
+                <p>Discover skills you may need to improve.</p>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- CHECKER -->
+    <section class="checker-section" id="checker">
+
+        <div class="section-heading">
+
+            <div class="badge">
+                🚀 Resume Checker
+            </div>
+
+            <h2>
+                Check how well your resume
+                <span>matches the job.</span>
+            </h2>
+
+            <p>
+                Upload your resume and paste the job description. Our analyzer will compare them and generate a report.
+            </p>
+
+        </div>
+
+
+        <div class="checker-box">
+
+            <!-- LEFT -->
+            <div class="upload-area">
+
+                <label class="input-label">
+                Your Resume
+            </label>
+
+                <label for="resume" class="upload-box">
+
+                <div class="upload-icon">
+                    ↑
+                </div>
+
+                <h3>
+                    Upload your resume
+                </h3>
+
+                <p>
+                    Drag & drop your PDF here or
+                    <strong>browse</strong>
+                </p>
+
+                <span class="file-info">
+                    PDF files only
+                </span>
+
+                <input
+                    type="file"
+                    id="resume"
+                    name="resume"
+                    accept=".pdf"
+                >
+
+            </label>
+
+                <div id="fileName" class="file-name"></div>
+
+            </div>
+
+
+            <!-- RIGHT -->
+            <div class="job-area">
+
+                <label for="job_description" class="input-label">
+                Job Description
+            </label>
+
+                <div class="textarea-box">
+
+                    <div class="textarea-header">
+                        <span>🎯 Target Job</span>
+                        <span class="optional">Required</span>
+                    </div>
+
+                    <textarea id="job_description" name="job_description" placeholder="Paste the job description here...
+
+Example:
+We are looking for a Frontend Developer with experience in HTML, CSS, JavaScript, React, Bootstrap and Git."></textarea>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <button id="analyzeButton" class="analyze-button">
+
+        <span>✨</span>
+        Analyze My Resume
+        <span>→</span>
+
+    </button>
+
+        <p id="loading" class="loading hidden">
+            ⏳ Analyzing your resume...
+        </p>
+
+        <div id="error" class="error hidden"></div>
+
+
+        <!-- RESULTS -->
+        <div id="result" class="results hidden">
+
+            <div class="result-header">
+
+                <div>
+                    <div class="badge">📊 Analysis Complete</div>
+
+                    <h2>
+                        Your Resume Report
+                    </h2>
+
+                    <p>
+                        Here's how your resume matches the target job.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- SCORE -->
+            <div class="score-section">
+
+                <div class="score-circle">
+
+                    <div>
+                        <strong id="score">0%</strong>
+                        <span>Match</span>
+                    </div>
+
+                </div>
+
+                <div class="score-content">
+
+                    <span class="result-label">
+                    RESUME MATCH
+                </span>
+
+                    <h3 id="scoreMessage">
+                        Your resume has been analyzed
+                    </h3>
+
+                    <p>
+                        This score represents the text similarity between your resume and the job description.
+                    </p>
+
+                    <div class="progress-background">
+                        <div id="scoreProgress" class="progress"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- STAT CARDS -->
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-icon blue">📄</div>
+                    <span>Word Count</span>
+                    <strong id="wordCount">0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon purple">🛠</div>
+                    <span>Skills Found</span>
+                    <strong id="skillCount">0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon green">🎯</div>
+                    <span>Job Skills</span>
+                    <strong id="jobSkillCount">0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon orange">⚠</div>
+                    <span>Missing Skills</span>
+                    <strong id="missingSkillCount">0</strong>
+                </div>
+
+            </div>
+
+
+            <!-- SKILLS -->
+            <div class="result-grid">
+
+                <div class="result-card">
+
+                    <div class="result-card-title">
+                        <div class="title-icon green">✓</div>
+
+                        <div>
+                            <h3>Your Skills</h3>
+                            <p>Skills detected in your resume</p>
+                        </div>
+                    </div>
+
+                    <div id="skills" class="tags"></div>
+
+                </div>
+
+
+                <div class="result-card">
+
+                    <div class="result-card-title">
+                        <div class="title-icon blue">🎯</div>
+
+                        <div>
+                            <h3>Job Skills</h3>
+                            <p>Skills required by the job</p>
+                        </div>
+                    </div>
+
+                    <div id="jobSkills" class="tags"></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MISSING -->
+            <div class="result-card missing-card">
+
+                <div class="result-card-title">
+
+                    <div class="title-icon orange">
+                        ⚠
+                    </div>
+
+                    <div>
+                        <h3>Missing Skills</h3>
+                        <p>Skills found in the job but not in your resume</p>
+                    </div>
+
+                </div>
+
+                <div id="missingSkills" class="tags"></div>
+
+            </div>
+
+
+            <!-- SECTIONS + SUGGESTIONS -->
+            <div class="result-grid">
+
+                <div class="result-card">
+
+                    <div class="result-card-title">
+
+                        <div class="title-icon purple">
+                            📋
+                        </div>
+
+                        <div>
+                            <h3>Resume Sections</h3>
+                            <p>Sections detected in your resume</p>
+                        </div>
+
+                    </div>
+
+                    <ul id="sections" class="result-list"></ul>
+
+                </div>
+
+
+                <div class="result-card">
+
+                    <div class="result-card-title">
+
+                        <div class="title-icon blue">
+                            💡
+                        </div>
+
+                        <div>
+                            <h3>Suggestions</h3>
+                            <p>Ways to improve your resume</p>
+                        </div>
+
+                    </div>
+
+                    <ul id="suggestions" class="result-list"></ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+
+        <div class="about-content">
+
+            <div class="badge">
+                🤖 About the Project
+            </div>
+
+            <h2>
+                Build a stronger resume with
+                <span>data-driven insights.</span>
+            </h2>
+
+            <p>
+                AI Resume Analyzer is a personal project built using Python, Flask, PDF text extraction and machine-learning based text similarity.
+            </p>
+
+            <div class="tech-stack">
+                <span>Python</span>
+                <span>Flask</span>
+                <span>Scikit-learn</span>
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <div class="footer-logo">
+            <div class="logo-icon">AI</div>
+            <strong>ResumeIQ</strong>
+        </div>
+
+        <p>
+            AI Resume Analyzer • Built with Python & Flask
+        </p>
+
+    </footer>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
