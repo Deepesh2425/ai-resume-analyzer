@@ -111,6 +111,15 @@ function displayResult(data) {
     // Skill Count
     document.getElementById("skillCount").textContent =
         data.skill_count;
+    
+    // Job Skills Count
+document.getElementById("jobSkillCount").textContent =
+    data.job_skills.length;
+
+
+// Missing Skills Count
+document.getElementById("missingSkillCount").textContent =
+    data.missing_skills.length;
 
 
     // Skills
