@@ -75,7 +75,8 @@ def detect_skills(text):
 
 
 # Calculate resume and job description similarity
-def calculate_similarity(resume_text, job_description):
+# Calculate text similarity
+def calculate_text_similarity(resume_text, job_description):
 
     documents = [
         resume_text.lower(),
@@ -93,6 +94,23 @@ def calculate_similarity(resume_text, job_description):
 
     return round(similarity * 100, 2)
 
+
+# Calculate skill match percentage
+def calculate_skill_match(resume_skills, job_skills):
+
+    if not job_skills:
+        return 0
+
+    matched_skills = [
+        skill
+        for skill in job_skills
+        if skill in resume_skills
+    ]
+
+    return round(
+        (len(matched_skills) / len(job_skills)) * 100,
+        2
+    )
 
 # Detect resume sections
 def detect_sections(text):
@@ -208,11 +226,27 @@ def analyze():
 
 
         # Calculate score
-        score = calculate_similarity(
-            resume_text,
-            job_description
-        )
+       # Calculate text similarity
+text_similarity = calculate_text_similarity(
+    resume_text,
+    job_description
+)
 
+# Calculate skill match
+skill_match = calculate_skill_match(
+    resume_skills,
+    job_skills
+)
+
+# Calculate final score
+if job_skills:
+    score = round(
+        (skill_match * 0.70) +
+        (text_similarity * 0.30),
+        2
+    )
+else:
+    score = text_similarity
 
         # Detect sections
         sections = detect_sections(
