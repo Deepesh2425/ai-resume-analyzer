@@ -289,29 +289,32 @@ else:
 
 
         # Final result
-        result = {
+       result = {
 
-            "score": score,
+    "score": score,
 
-            "word_count": len(
-                resume_text.split()
-            ),
+    "text_similarity": text_similarity,
 
-            "skills": resume_skills,
+    "skill_match": skill_match,
 
-            "skill_count": len(
-                resume_skills
-            ),
+    "word_count": len(
+        resume_text.split()
+    ),
 
-            "job_skills": job_skills,
+    "skills": resume_skills,
 
-            "missing_skills": missing_skills,
+    "skill_count": len(
+        resume_skills
+    ),
 
-            "sections": sections,
+    "job_skills": job_skills,
 
-            "suggestions": suggestions
-        }
+    "missing_skills": missing_skills,
 
+    "sections": sections,
+
+    "suggestions": suggestions
+}
 
         return jsonify(result)
 
